@@ -9,9 +9,22 @@
 const User = require("../models/User"); // 사용자 모델 요청
 
 module.exports = {
-  /*
-   * @TODO: index과 indexView 액션을 객체 리터럴로 묶어 익스포트
-   */
+  index: (req, res, next) =>{ //BD요청과 응답
+    User.find()
+    .then(users=>{
+      res.locals.users = users;
+      next();
+    })
+    .catch(e=>{
+      console.log(`Error getting user: ${e.message}`);
+      //res.redrect("/");
+      next(e);
+    });
+
+  },
+  indexView: (req, res)=>{ //페이지 렌더링
+    res.render("users/index");
+  }
 };
 
 /**

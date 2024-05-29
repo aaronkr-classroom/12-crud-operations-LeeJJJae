@@ -8,10 +8,13 @@ const mongoose = require("mongoose"),
   User = require("../models/User");
 
 // 데이터베이스 연결 설정
-mongoose.connect("mongodb://127.0.0.1:27017/ut-nodejs", {
-  useNewUrlParser: true,
+mongoose.connect(
+  "mongodb+srv://135ssg:8m6wl5LWOF5fnHKd@ut-node.lvbkpqv.mongodb.net/?retryWrites=true&w=majority&appName=ut-node", //Atils 경로
+)
+const db = mongoose.connection;
+db.once("open",()=>{
+  console.log("Connedted DB");
 });
-
 mongoose.connection;
 
 /** 
@@ -157,4 +160,4 @@ setTimeout(() => {
     .catch((error) => {
       console.log(`Error: ${error}`);
     });
-}, 500);
+}, 1500);
